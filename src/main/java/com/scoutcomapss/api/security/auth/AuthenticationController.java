@@ -1,0 +1,29 @@
+package com.scoutcomapss.api.security.auth;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/auth")
+@RequiredArgsConstructor
+public class AuthenticationController {
+
+  private final AuthenticationService authenticationService;
+
+  //scout registration
+  @PostMapping("/scout/register")
+  public ResponseEntity<AuthenticationResponse> register(@RequestBody ScoutRegisterRequest request) {
+    return ResponseEntity.ok(authenticationService.registerScout(request));
+  }
+
+  //scout auth
+  @PostMapping("/scout/authenticate")
+  public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
+    return ResponseEntity.ok(authenticationService.authenticateScout(request));
+  }
+
+}
