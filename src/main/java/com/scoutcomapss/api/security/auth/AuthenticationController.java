@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")// Specify the allowed origin(s)
+//@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
@@ -14,14 +15,21 @@ public class AuthenticationController {
 
   //scout registration
   @PostMapping("/scout/register")
-  public ResponseEntity<AuthenticationResponse> register(@RequestBody ScoutRegisterRequest request) {
+  public ResponseEntity<AuthenticationResponse> registerScout(@RequestBody ScoutRegisterRequest request) {
     return ResponseEntity.ok(authenticationService.registerScout(request));
   }
 
   //scout auth
   @PostMapping("/scout/authenticate")
-  public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
-    return ResponseEntity.ok(authenticationService.authenticateScout(request));
+  public ResponseEntity<AuthenticationResponse> authenticateScout(@RequestBody AuthenticationRequest request) {
+    return ResponseEntity.ok(authenticationService.authenticateUser(request));
   }
+
+  //instructor registration
+  @PostMapping("/instruct/register")
+  public ResponseEntity<AuthenticationResponse> registerInstruct(@RequestBody InstructRegisterRequest request){
+    return ResponseEntity.ok(authenticationService.registerInstruct(request));
+  }
+
 
 }

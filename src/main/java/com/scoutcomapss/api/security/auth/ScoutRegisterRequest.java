@@ -1,5 +1,6 @@
 package com.scoutcomapss.api.security.auth;
 
+import com.scoutcomapss.api.user.Instructor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +14,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class ScoutRegisterRequest {
 
-;
   private String scoutFirstName;
   private String scoutLastname;
   private String scoutEmail;

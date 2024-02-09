@@ -25,8 +25,9 @@ public class SecurityConfiguration {
     http
             .csrf((csrf) -> csrf.disable())
             .authorizeHttpRequests((authz) -> authz
-                    .requestMatchers("/api/v1/auth/**")
-                    .permitAll()
+                    .requestMatchers("/api/v1/auth/**").permitAll()
+                  //  .requestMatchers("/api/v1/test/**").permitAll()
+                  // .requestMatchers("/api/v1/test/**").hasAuthority("ADMIN")
                   //  .requestMatchers(GET ,"/api/v1/demo-controller/**").permitAll()
                     .anyRequest().authenticated())
                     .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

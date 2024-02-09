@@ -1,6 +1,6 @@
 package com.scoutcomapss.api.security.config;
 
-import com.scoutcomapss.api.user.UserRepository;
+import com.scoutcomapss.api.user.ScoutRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -22,7 +20,7 @@ import org.springframework.web.filter.CorsFilter;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-  private final UserRepository repository;
+  private final ScoutRepository repository;
 
   @Bean
   public UserDetailsService userDetailsService() {

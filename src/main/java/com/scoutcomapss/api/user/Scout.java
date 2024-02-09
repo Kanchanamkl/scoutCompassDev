@@ -22,21 +22,29 @@ import java.util.List;
 public class Scout implements UserDetails {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(
+          strategy = GenerationType.SEQUENCE
+  )
   private Integer scoutId;
   private String scoutFirstName;
   private String scoutLastname;
+  @Column(nullable = false)
   private String scoutEmail;
   private Date  scoutDob;
   private String scoutGender;
   private String scoutMobNum;
   private String scoutSchool;
   private String scoutPassword;
-  private String instructorId;
+//  private String instructorId;
+  private boolean isEnable;
 
   @Enumerated(EnumType.STRING)
   private Role role;
   private Boolean enabled ;
+
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @JoinColumn(name = "instructor_id")
+  public Instructor instructor;
 
 
   @Override
@@ -71,7 +79,7 @@ public class Scout implements UserDetails {
 
   @Override
   public boolean isEnabled() {
-    return true;
+    return isEnable;
   }
 
 
