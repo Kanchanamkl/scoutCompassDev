@@ -1,6 +1,7 @@
 package com.scoutcomapss.api.security.config;
 
 import com.scoutcomapss.api.user.ScoutRepository;
+import com.scoutcomapss.api.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,12 +21,13 @@ import org.springframework.web.filter.CorsFilter;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-  private final ScoutRepository repository;
+  //  private final ScoutRepository repository;
+  private final UserRepository userRepository;
 
   @Bean
   public UserDetailsService userDetailsService() {
-    return username -> repository.findByScoutEmail(username)
-        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    return username -> userRepository.findByUserName(username)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
   }
 
   @Bean

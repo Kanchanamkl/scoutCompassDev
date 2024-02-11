@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "_scout")
-public class Scout implements UserDetails {
+public class Scout {
 
   @Id
   @GeneratedValue(
@@ -35,7 +35,7 @@ public class Scout implements UserDetails {
   private String scoutMobNum;
   private String scoutSchool;
   private String scoutPassword;
-//  private String instructorId;
+  //  private String instructorId;
   private boolean isEnable;
 
   @Enumerated(EnumType.STRING)
@@ -47,40 +47,40 @@ public class Scout implements UserDetails {
   public Instructor instructor;
 
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return List.of(new SimpleGrantedAuthority(role.name()));
-  }
-
-  @Override
-  public String getPassword() {
-    return scoutPassword;
-  }
-
-  @Override
-  public String getUsername() {
-    return scoutEmail;
-  }
-
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
-
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return isEnable;
-  }
+//  @Override
+//  public Collection<? extends GrantedAuthority> getAuthorities() {
+//    return List.of(new SimpleGrantedAuthority(role.name()));
+//  }
+//
+//  @Override
+//  public String getPassword() {
+//    return scoutPassword;
+//  }
+//
+//  @Override
+//  public String getUsername() {
+//    return scoutEmail;
+//  }
+//
+//  @Override
+//  public boolean isAccountNonExpired() {
+//    return true;
+//  }
+//
+//  @Override
+//  public boolean isAccountNonLocked() {
+//    return true;
+//  }
+//
+//  @Override
+//  public boolean isCredentialsNonExpired() {
+//    return true;
+//  }
+//
+//  @Override
+//  public boolean isEnabled() {
+//    return isEnable;
+//  }
 
 
 }

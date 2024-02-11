@@ -26,13 +26,13 @@ public class SecurityConfiguration {
             .csrf((csrf) -> csrf.disable())
             .authorizeHttpRequests((authz) -> authz
                     .requestMatchers("/api/v1/auth/**").permitAll()
-                  //  .requestMatchers("/api/v1/test/**").permitAll()
-                  // .requestMatchers("/api/v1/test/**").hasAuthority("ADMIN")
-                  //  .requestMatchers(GET ,"/api/v1/demo-controller/**").permitAll()
+                    //  .requestMatchers("/api/v1/test/**").permitAll()
+                    // .requestMatchers("/api/v1/test/**").hasAuthority("ADMIN")
+                    //  .requestMatchers(GET ,"/api/v1/demo-controller/**").permitAll()
                     .anyRequest().authenticated())
-                    .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                    .authenticationProvider(authenticationProvider)
-                     .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authenticationProvider(authenticationProvider)
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
   }

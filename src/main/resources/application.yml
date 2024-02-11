@@ -4,6 +4,7 @@ server:
     include-binding-errors: always
 
   port: 8081
+  #address: 192.168.132.96
 
 
 spring:
@@ -20,6 +21,12 @@ spring:
         dialect:
         format_sql: true
     show-sql: true
+logging:
+  file:
+    name: ../apiLogs/scoutCompass.log
+
+
+
 
 
 

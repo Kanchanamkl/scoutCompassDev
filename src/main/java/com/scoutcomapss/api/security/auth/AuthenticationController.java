@@ -20,8 +20,8 @@ public class AuthenticationController {
   }
 
   //scout auth
-  @PostMapping("/scout/authenticate")
-  public ResponseEntity<AuthenticationResponse> authenticateScout(@RequestBody AuthenticationRequest request) {
+  @PostMapping("/user/authenticate")
+  public ResponseEntity<AuthenticationResponse> authenticateUser(@RequestBody AuthenticationRequest request) {
     return ResponseEntity.ok(authenticationService.authenticateUser(request));
   }
 
