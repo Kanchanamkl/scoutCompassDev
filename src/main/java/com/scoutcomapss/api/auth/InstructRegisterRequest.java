@@ -1,4 +1,4 @@
-package com.scoutcomapss.api.security.auth;
+package com.scoutcomapss.api.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

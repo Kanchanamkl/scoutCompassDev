@@ -1,8 +1,8 @@
-package com.scoutcomapss.api.security.auth;
+package com.scoutcomapss.api.auth;
 
 
-import com.scoutcomapss.api.security.config.JwtService;
-import com.scoutcomapss.api.user.*;
+import com.scoutcomapss.api.config.JwtService;
+import com.scoutcomapss.api.auth.user.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

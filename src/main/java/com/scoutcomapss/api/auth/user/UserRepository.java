@@ -1,4 +1,4 @@
-package com.scoutcomapss.api.user;
+package com.scoutcomapss.api.auth.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

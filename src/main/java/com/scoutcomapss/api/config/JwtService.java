@@ -1,4 +1,4 @@
-package com.scoutcomapss.api.security.config;
+package com.scoutcomapss.api.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

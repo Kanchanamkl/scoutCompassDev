@@ -23,7 +23,7 @@ spring:
     show-sql: true
 logging:
   file:
-    name: ./apiLogs/scout-compass-api.log
+    name: ./apilogs/scout-compass-api.log
 
 
 

@@ -1,7 +1,6 @@
-package com.scoutcomapss.api.security.config;
+package com.scoutcomapss.api.config;
 
-import com.scoutcomapss.api.user.ScoutRepository;
-import com.scoutcomapss.api.user.UserRepository;
+import com.scoutcomapss.api.auth.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

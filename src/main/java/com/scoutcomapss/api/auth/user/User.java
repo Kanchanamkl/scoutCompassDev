@@ -1,4 +1,4 @@
-package com.scoutcomapss.api.user;
+package com.scoutcomapss.api.auth.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
