@@ -20,6 +20,7 @@ public class ScoutRegisterRequest {
   private String scoutGender;
   private String scoutMobNum;
   private String scoutSchool;
+  private String scoutDistrict;
   private String scoutPassword;
   private String instructorId;
 

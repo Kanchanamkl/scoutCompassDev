@@ -34,6 +34,8 @@ public class Instructor {
     private String instructMobNum;
     private String instructSchool;
     private String instructPassword;
+    private String instructWarrantId;
+    private String instructDistrict;
     private boolean isEnable;
 
     @Enumerated(EnumType.STRING)

@@ -33,6 +33,7 @@ public class AuthenticationService {
                 .scoutGender(scoutRegisterRequest.getScoutGender())
                 .scoutMobNum(scoutRegisterRequest.getScoutMobNum())
                 .scoutSchool(scoutRegisterRequest.getScoutSchool())
+                .scoutDistrict(scoutRegisterRequest.getScoutDistrict())
                 .scoutPassword(passwordEncoder.encode(scoutRegisterRequest.getScoutPassword()))
                 .instructor(instructor.get())
                 .role(Role.ROLE_SCOUT)
@@ -69,6 +70,8 @@ public class AuthenticationService {
                 .instructMobNum(instructRegisterRequest.getInstructMobNum())
                 .instructSchool(instructRegisterRequest.getInstructSchool())
                 .instructPassword(passwordEncoder.encode(instructRegisterRequest.getInstructPassword()))
+                .instructWarrantId(instructRegisterRequest.getInstructWarrantId())
+                .instructDistrict(instructRegisterRequest.getInstructDistrict())
                 .role(Role.ROLE_INSTRUCTOR)
                 .build();
 

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "*")// Specify the allowed origin(s)
 //@CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/scoutcompass/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 

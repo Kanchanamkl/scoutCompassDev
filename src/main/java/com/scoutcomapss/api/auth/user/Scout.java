@@ -29,6 +29,7 @@ public class Scout {
   private String scoutGender;
   private String scoutMobNum;
   private String scoutSchool;
+  private String scoutDistrict;
   private String scoutPassword;
   //  private String instructorId;
   private boolean isEnable;

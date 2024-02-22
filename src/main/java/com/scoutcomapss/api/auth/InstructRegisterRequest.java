@@ -20,11 +20,13 @@ public class InstructRegisterRequest {
     private String instructFirstName;
     private String instructLastName;
     private String instructEmail;
+    private String instructPassword;
     private Date instructDob;
     private String instructGender;
     private String instructMobNum;
     private String instructSchool;
-    private String instructPassword;
+    private String instructDistrict;
+    private String instructWarrantId;
     private boolean isEnable;
 
 }
