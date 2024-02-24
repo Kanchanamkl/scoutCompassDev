@@ -27,9 +27,15 @@ spring:
         dialect:
         format_sql: true
     show-sql: true
-logging:
-  file:
-    name: ./apilogs/scout-compass-api.log
+  logging:
+    file:
+      name: ./apilogs/scout-compass-api.log
+
+  servlet:
+      multipart:
+        enabled: true
+        max-file-size: 10MB
+        max-request-size: 10MB
 
 
 
