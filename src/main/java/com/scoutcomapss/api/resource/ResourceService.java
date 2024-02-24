@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 /**
@@ -27,7 +29,7 @@ public class ResourceService {
     private  final String RESOURCE_PATH ="./resources/";
 
 
-    public String uploadImageToFileSystem(MultipartFile file) throws IOException {
+    public String uploadResouceToFileSystem(MultipartFile file) throws IOException {
 
         File resourceFile = new File(RESOURCE_PATH);
         if(!resourceFile.exists()){
@@ -54,11 +56,30 @@ public class ResourceService {
 
 
 
-    public byte[] downloadImageFromFileSystem(String fileName) throws IOException {
+    public byte[] downloadResouceFromFileSystem(String fileName) throws IOException {
         Optional<Resource> fileData = resourceRepository.findByResourceName(fileName);
         String filePath=fileData.get().getResourceFilePath();
         byte[] resource = Files.readAllBytes(new File(filePath).toPath());
         return resource;
+    }
+
+    public boolean deleteResource(String fileName){
+        Optional<Resource> resourceOptional = resourceRepository.findByResourceName(fileName);
+        if (resourceOptional.isPresent()) {
+            Resource resource = resourceOptional.get();
+            resourceRepository.delete(resource);
+        } else {
+            return false;
+        }
+
+        Path filePath = Paths.get(RESOURCE_PATH + fileName);
+        try {
+            Files.delete(filePath);
+            return true; // Delete successful
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false; // Delete failed
+        }
     }
 
 }

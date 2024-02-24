@@ -1,8 +1,6 @@
 package com.scoutcomapss.api.resource;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,18 +24,31 @@ public class ResourceController {
     private final ResourceService resourceService;
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadImageToFIleSystem(@RequestParam("resource") MultipartFile file) throws IOException {
-        String uploadImage = resourceService.uploadImageToFileSystem(file);
+    public ResponseEntity<?> uploadResourceToFIleSystem(@RequestParam("resource") MultipartFile file) throws IOException {
+        String uploadImage = resourceService.uploadResouceToFileSystem(file);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(uploadImage);
     }
 
     @GetMapping("/download/{fileName}")
-    public ResponseEntity<?> downloadImageFromFileSystem(@PathVariable String fileName) throws IOException {
-        byte[] imageData=resourceService.downloadImageFromFileSystem(fileName);
+    public ResponseEntity<?> downloadResourceFromFileSystem(@PathVariable String fileName) throws IOException {
+        byte[] imageData=resourceService.downloadResouceFromFileSystem(fileName);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("application/pdf"))
                 .body(imageData);
 
+    }
+
+    @DeleteMapping("/delete/{fileName}")
+    public ResponseEntity<?> deleteResourceFromFileSystem(@PathVariable String fileName) {
+        boolean deletionStatus = resourceService.deleteResource(fileName);
+
+        if (deletionStatus) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("Resource deleted successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Resource not found or unable to delete");
+        }
     }
 }
