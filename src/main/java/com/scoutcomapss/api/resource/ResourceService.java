@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -24,7 +25,7 @@ public class ResourceService {
    @Autowired
     private  ResourceRepository resourceRepository;
 
-
+    private ArrayList<Resource> resourceList= new ArrayList<Resource>();
 
     private  final String RESOURCE_PATH ="./resources/";
 
@@ -80,6 +81,11 @@ public class ResourceService {
             e.printStackTrace();
             return false; // Delete failed
         }
+    }
+
+    public ArrayList<Resource> getResourceList(){
+        ArrayList<Resource> resourceArrayList = resourceRepository.findAllByResourceId();
+        return  resourceArrayList;
     }
 
 }

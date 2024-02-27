@@ -16,7 +16,7 @@ public class AuthenticationController {
   //scout registration
   @PostMapping("/scout/register")
   public ResponseEntity<AuthenticationResponse> registerScout(@RequestBody ScoutRegisterRequest request) {
-    return ResponseEntity.ok(authenticationService.registerScout(request));
+    return ResponseEntity.ok().body(authenticationService.registerScout(request));
   }
 
   //scout auth

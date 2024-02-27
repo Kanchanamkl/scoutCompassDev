@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author : Kanchana Kalansooriya
@@ -39,6 +40,14 @@ public class ResourceController {
 
     }
 
+
+    @GetMapping("/resourceList")
+    public ResponseEntity<?> getResourceList(){
+        ArrayList<Resource> resourceArrayList = resourceService.getResourceList();
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(resourceArrayList);
+    }
     @DeleteMapping("/delete/{fileName}")
     public ResponseEntity<?> deleteResourceFromFileSystem(@PathVariable String fileName) {
         boolean deletionStatus = resourceService.deleteResource(fileName);
