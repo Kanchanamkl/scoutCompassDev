@@ -28,6 +28,7 @@ public class SecurityConfiguration {
                     .requestMatchers("/api/scoutcompass/auth/**").permitAll()
                     .requestMatchers("/api/scoutcompass/resource/**").permitAll()
                     .requestMatchers("/api/scoutcompass/profile/**").permitAll()
+                    .requestMatchers("/api/scoutcompass/requirement/**").permitAll()
                     //  .requestMatchers("/api/v1/test/**").permitAll()
                     // .requestMatchers("/api/v1/test/**").hasAuthority("ADMIN")
                     //  .requestMatchers(GET ,"/api/v1/demo-controller/**").permitAll()
