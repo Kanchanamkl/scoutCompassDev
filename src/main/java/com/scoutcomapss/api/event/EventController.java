@@ -35,7 +35,7 @@ public class EventController {
                 .body(eventList);
     }
 
-    @DeleteMapping("/delete/{fileName}")
+    @DeleteMapping("/delete/{eventName}")
     public ResponseEntity<?> deleteEvent(@PathVariable String eventName) {
         boolean deletionStatus = eventServices.deleteEvent(eventName);
 

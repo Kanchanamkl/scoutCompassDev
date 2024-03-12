@@ -29,6 +29,9 @@ public class EventServices {
                 .eventDate(eventCreateRequest.getEventDate())
                 .dayDuration(eventCreateRequest.getDayDuration())
                 .eventLocation(eventCreateRequest.getEventLocation())
+                .startTime(eventCreateRequest.getStartTime())
+                .description(eventCreateRequest.getDescription())
+                .formLink(eventCreateRequest.getFormLink())
                 .build();
 
         eventRepository.save(event);

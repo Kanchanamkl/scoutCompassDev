@@ -8,4 +8,6 @@ public interface ScoutRepository extends JpaRepository<Scout, Integer>  {
 
   Optional<Scout> findByScoutEmail(String email);
 
+
+
 }

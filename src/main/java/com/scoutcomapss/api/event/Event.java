@@ -27,5 +27,8 @@ public class Event {
     private Date eventDate;
     private Integer dayDuration;
     private String eventLocation;
+    private String startTime;
+    private String description;
+    private String formLink;
 
 }
