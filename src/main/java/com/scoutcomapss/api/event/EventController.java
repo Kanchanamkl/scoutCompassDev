@@ -48,4 +48,11 @@ public class EventController {
         }
     }
 
+    @GetMapping("/latestEvent")
+    public ResponseEntity<Event> getLatestEvent(){
+        Event event  = eventServices.getLatestEvent();
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(event);
+    }
+
 }

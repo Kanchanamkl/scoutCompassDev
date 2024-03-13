@@ -48,6 +48,11 @@ public class EventServices {
         return  eventList;
     }
 
+    public Event getLatestEvent(){
+        Event event = eventRepository.getLatestEvent();
+        return event;
+    }
+
 
     public boolean deleteEvent(String eventName){
         Optional<Event> event = eventRepository.findByEventName(eventName);

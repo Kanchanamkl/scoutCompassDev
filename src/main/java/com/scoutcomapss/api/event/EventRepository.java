@@ -15,4 +15,9 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Query("SELECT e FROM Event e ")
     ArrayList<Event> findAllByEventId();
+
+
+
+    @Query("SELECT e FROM Event e ORDER BY e.eventId DESC ")
+    Event getLatestEvent();
 }
