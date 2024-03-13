@@ -18,6 +18,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
 
 
-    @Query("SELECT e FROM Event e ORDER BY e.eventId DESC ")
+    @Query("SELECT e FROM Event e WHERE e.eventId = (SELECT MAX(e2.eventId) FROM Event e2)")
     Event getLatestEvent();
 }
