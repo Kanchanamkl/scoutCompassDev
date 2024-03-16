@@ -1,6 +1,7 @@
-package com.scoutcomapss.api.security.config;
+package com.scoutcomapss.api.config;
 
-import com.scoutcomapss.api.user.UserRepository;
+import com.scoutcomapss.api.auth.user.UserRepository;
+import com.scoutcomapss.api.resource.ResourceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,17 +13,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-  private final UserRepository repository;
+  //  private final ScoutRepository repository;
+  private final UserRepository userRepository;
 
   @Bean
   public UserDetailsService userDetailsService() {
-    return username -> repository.findByScoutEmail(username)
-        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    return username -> userRepository.findByUserName(username)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
   }
 
   @Bean
@@ -41,6 +46,18 @@ public class ApplicationConfig {
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
+  }
+
+  @Bean
+  public CorsFilter corsFilter() {
+
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    CorsConfiguration config = new CorsConfiguration();
+    config.addAllowedOrigin("*"); // Allow all origins
+    config.addAllowedMethod("*"); // Allow all HTTP methods
+    config.addAllowedHeader("*"); // Allow all headers
+    source.registerCorsConfiguration("/**", config);
+    return new CorsFilter(source);
   }
 
 }

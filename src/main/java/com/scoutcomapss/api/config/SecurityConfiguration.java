@@ -1,4 +1,4 @@
-package com.scoutcomapss.api.security.config;
+package com.scoutcomapss.api.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -25,13 +25,18 @@ public class SecurityConfiguration {
     http
             .csrf((csrf) -> csrf.disable())
             .authorizeHttpRequests((authz) -> authz
-                    .requestMatchers("/api/v1/auth/**")
-                    .permitAll()
-                  //  .requestMatchers(GET ,"/api/v1/demo-controller/**").permitAll()
+                    .requestMatchers("/api/scoutcompass/auth/**").permitAll()
+                    .requestMatchers("/api/scoutcompass/resource/**").permitAll()
+                    .requestMatchers("/api/scoutcompass/profile/**").permitAll()
+                    .requestMatchers("/api/scoutcompass/requirement/**").permitAll()
+                    .requestMatchers("/api/scoutcompass/event/**").permitAll()
+                    //  .requestMatchers("/api/v1/test/**").permitAll()
+                    // .requestMatchers("/api/v1/test/**").hasAuthority("ADMIN")
+                    //  .requestMatchers(GET ,"/api/v1/demo-controller/**").permitAll()
                     .anyRequest().authenticated())
-                    .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                    .authenticationProvider(authenticationProvider)
-                     .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authenticationProvider(authenticationProvider)
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
   }
