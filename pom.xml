@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.scoutcomapss</groupId>
 	<artifactId>scoutcompass</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>scoutcompass</name>
 	<description>scoutcompass api</description>
 	<properties>
