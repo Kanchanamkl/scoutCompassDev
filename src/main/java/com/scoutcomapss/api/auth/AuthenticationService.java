@@ -3,12 +3,15 @@ package com.scoutcomapss.api.auth;
 
 import com.scoutcomapss.api.config.JwtService;
 import com.scoutcomapss.api.auth.user.*;
+import com.scoutcomapss.api.event.Event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,74 +25,86 @@ public class AuthenticationService {
     private final UserRepository userRepository;
 
     public AuthenticationResponse registerScout(ScoutRegisterRequest scoutRegisterRequest) {
-        Optional<Instructor> instructor = instructorRepository.findByInstructId(Integer.valueOf(scoutRegisterRequest.getInstructorId()));
+        Boolean isScoutPresent = scoutRepository.findByScoutEmail(scoutRegisterRequest.getScoutEmail()).isPresent();
+        if(isScoutPresent){
+            return  null;
+        }else{
+            Optional<Instructor> instructor = instructorRepository.findByInstructId(Integer.valueOf(scoutRegisterRequest.getInstructorId()));
 
-        Scout scout = Scout.builder()
-                .enabled(true)   // this boolean should be false after implementation of account activation.
-                .scoutFirstName(scoutRegisterRequest.getScoutFirstName())
-                .scoutLastname(scoutRegisterRequest.getScoutLastname())
-                .scoutEmail(scoutRegisterRequest.getScoutEmail())
-                .scoutDob(scoutRegisterRequest.getScoutDob())
-                .scoutGender(scoutRegisterRequest.getScoutGender())
-                .scoutMobNum(scoutRegisterRequest.getScoutMobNum())
-                .scoutSchool(scoutRegisterRequest.getScoutSchool())
-                .scoutDistrict(scoutRegisterRequest.getScoutDistrict())
-                .scoutPassword(passwordEncoder.encode(scoutRegisterRequest.getScoutPassword()))
-                .instructor(instructor.get())
-                .role(Role.ROLE_SCOUT)
-                .build();
+            Scout scout = Scout.builder()
+                    .enabled(true)   // this boolean should be false after implementation of account activation.
+                    .scoutFirstName(scoutRegisterRequest.getScoutFirstName())
+                    .scoutLastname(scoutRegisterRequest.getScoutLastname())
+                    .scoutEmail(scoutRegisterRequest.getScoutEmail())
+                    .scoutDob(scoutRegisterRequest.getScoutDob())
+                    .scoutGender(scoutRegisterRequest.getScoutGender())
+                    .scoutMobNum(scoutRegisterRequest.getScoutMobNum())
+                    .scoutSchool(scoutRegisterRequest.getScoutSchool())
+                    .scoutDistrict(scoutRegisterRequest.getScoutDistrict())
+                    .scoutPassword(passwordEncoder.encode(scoutRegisterRequest.getScoutPassword()))
+                    .instructor(instructor.get())
+                    .role(Role.ROLE_SCOUT)
+                    .build();
 
-        scoutRepository.save(scout);
+            scoutRepository.save(scout);
 
-        User user = User.builder()
-                .userName(scoutRegisterRequest.getScoutEmail())
-                .userPassword(passwordEncoder.encode(scoutRegisterRequest.getScoutPassword()))
-                .role(Role.ROLE_SCOUT)
-                .build();
+            User user = User.builder()
+                    .userName(scoutRegisterRequest.getScoutEmail())
+                    .userPassword(passwordEncoder.encode(scoutRegisterRequest.getScoutPassword()))
+                    .role(Role.ROLE_SCOUT)
+                    .build();
 
-        userRepository.save(user);
-
-
-        // todo: email verification and account activation part - sachini
+            userRepository.save(user);
 
 
-        var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+            // todo: email verification and account activation part - sachini
+
+
+            var jwtToken = jwtService.generateToken(user);
+            return AuthenticationResponse.builder().token(jwtToken).build();
+        }
+
     }
 
 
     public AuthenticationResponse registerInstruct(InstructRegisterRequest instructRegisterRequest) {
+        Boolean isInstructorPresent = instructorRepository.findInstructorByInstructEmail(instructRegisterRequest.getInstructEmail()).isPresent();
+        if(isInstructorPresent){
+            return  null;
+        }else{
 
-        Instructor instructor = Instructor.builder()
-                .enabled(true)   // this boolean should be false after implementation of account activation.
-                .instructFirstName(instructRegisterRequest.getInstructFirstName())
-                .instructLastname(instructRegisterRequest.getInstructLastName())
-                .instructEmail(instructRegisterRequest.getInstructEmail())
-                .instructDob(instructRegisterRequest.getInstructDob())
-                .instructGender(instructRegisterRequest.getInstructGender())
-                .instructMobNum(instructRegisterRequest.getInstructMobNum())
-                .instructSchool(instructRegisterRequest.getInstructSchool())
-                .instructPassword(passwordEncoder.encode(instructRegisterRequest.getInstructPassword()))
-                .instructWarrantId(instructRegisterRequest.getInstructWarrantId())
-                .instructDistrict(instructRegisterRequest.getInstructDistrict())
-                .role(Role.ROLE_INSTRUCTOR)
-                .build();
+            Instructor instructor = Instructor.builder()
+                    .enabled(true)   // this boolean should be false after implementation of account activation.
+                    .instructFirstName(instructRegisterRequest.getInstructFirstName())
+                    .instructLastname(instructRegisterRequest.getInstructLastname())
+                    .instructEmail(instructRegisterRequest.getInstructEmail())
+                    .instructDob(instructRegisterRequest.getInstructDob())
+                    .instructGender(instructRegisterRequest.getInstructGender())
+                    .instructMobNum(instructRegisterRequest.getInstructMobNum())
+                    .instructSchool(instructRegisterRequest.getInstructSchool())
+                    .instructPassword(passwordEncoder.encode(instructRegisterRequest.getInstructPassword()))
+                    .instructWarrantId(instructRegisterRequest.getInstructWarrantId())
+                    .instructDistrict(instructRegisterRequest.getInstructDistrict())
+                    .role(Role.ROLE_INSTRUCTOR)
+                    .build();
 
-        instructorRepository.save(instructor);
+            instructorRepository.save(instructor);
 
-        User user = User.builder()
-                .userName(instructRegisterRequest.getInstructEmail())
-                .userPassword(passwordEncoder.encode(instructRegisterRequest.getInstructPassword()))
-                .role(Role.ROLE_SCOUT)
-                .build();
+            User user = User.builder()
+                    .userName(instructRegisterRequest.getInstructEmail())
+                    .userPassword(passwordEncoder.encode(instructRegisterRequest.getInstructPassword()))
+                    .role(Role.ROLE_INSTRUCTOR)
+                    .build();
 
-        userRepository.save(user);
+            userRepository.save(user);
 
-        // todo: email verification and account activation part - sachini
+            // todo: email verification and account activation part - sachini
 
 
-        var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+            var jwtToken = jwtService.generateToken(user);
+            return AuthenticationResponse.builder().token(jwtToken).build();
+        }
+
     }
 
 
@@ -105,6 +120,13 @@ public class AuthenticationService {
         var user = userRepository.findByUserName(request.getEmail()).orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
+    }
+
+
+
+    public List<Instructor> getInstructorList(){
+        List<Instructor> instructorList = instructorRepository.findAll();
+        return  instructorList;
     }
 
 

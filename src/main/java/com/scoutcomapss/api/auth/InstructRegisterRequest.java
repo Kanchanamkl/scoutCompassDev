@@ -18,7 +18,7 @@ import java.util.Date;
 public class InstructRegisterRequest {
 
     private String instructFirstName;
-    private String instructLastName;
+    private String instructLastname;
     private String instructEmail;
     private String instructPassword;
     private Date instructDob;

@@ -9,10 +9,8 @@ import java.util.Optional;
  * @since 2/5/2024
  */
 public interface InstructorRepository extends JpaRepository<Instructor, Integer> {
-    Optional<Instructor> findByInstructEmail(String email);
     Optional<Instructor> findByInstructId(Integer instructId);
-
-
+    Optional<Instructor> findInstructorByInstructEmail(String instructEmail);
 
 
 }
