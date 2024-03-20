@@ -9,26 +9,19 @@ server:
 
 spring:
   datasource:
-
-#    url: jdbc:mysql://scoutcompass-db-identifier.chg4ims6kcai.ap-south-1.rds.amazonaws.com:3306/scoutcompass-db-identifier
+#    url: jdbc:mysql://scoutcompass-db.chg4ims6kcai.ap-south-1.rds.amazonaws.com:3306/scoutcompass-db-identifier
 #    username: admin
 #    password: scoutcompass1234
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 
     url: jdbc:mysql://localhost:3306/scout_compass_schema
     username: root
-    password: thisu567Lfc#
-
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-
-#    url: jdbc:mysql://localhost:3306/scout_compass_schema
-#    username: root
-#    password: viki200063
-#    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect:
