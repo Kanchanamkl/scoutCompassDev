@@ -1,7 +1,9 @@
 package com.scoutcomapss.api.auth;
 
 import com.scoutcomapss.api.auth.user.Instructor;
+import com.scoutcomapss.api.auth.user.User;
 import com.scoutcomapss.api.event.Event;
+import com.scoutcomapss.api.requirement.status.RequirementStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,5 +70,29 @@ public class AuthenticationController {
             .body(instructorList);
   }
 
+  @GetMapping("/user")
+  public ResponseEntity<User> getUserByUserEmail(@RequestParam String userEmail){
+
+     User user = authenticationService.getUserByUserEmail(userEmail);
+      return ResponseEntity.
+              status(HttpStatus.OK)
+              .body(user);
+  }
+
+
+
+  @PostMapping("/admin/register")
+  public ResponseEntity<AuthenticationResponse> registerAdmin(@RequestBody AdminRegisterRequest adminRegisterRequest) {
+    if(authenticationService.registerAdmin(adminRegisterRequest)!=null){
+      return ResponseEntity
+              .status(HttpStatus.OK)
+              .body(authenticationService.registerAdmin(adminRegisterRequest));
+    }else{
+      return ResponseEntity
+              .status(HttpStatus.INTERNAL_SERVER_ERROR)
+              .body(null);
+    }
+
+  }
 
 }

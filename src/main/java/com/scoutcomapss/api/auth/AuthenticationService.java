@@ -3,14 +3,12 @@ package com.scoutcomapss.api.auth;
 
 import com.scoutcomapss.api.config.JwtService;
 import com.scoutcomapss.api.auth.user.*;
-import com.scoutcomapss.api.event.Event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +23,7 @@ public class AuthenticationService {
     private final UserRepository userRepository;
 
     public AuthenticationResponse registerScout(ScoutRegisterRequest scoutRegisterRequest) {
-        Boolean isScoutPresent = scoutRepository.findByScoutEmail(scoutRegisterRequest.getScoutEmail()).isPresent();
+        boolean isScoutPresent = scoutRepository.findByScoutEmail(scoutRegisterRequest.getScoutEmail()).isPresent();
         if(isScoutPresent){
             return  null;
         }else{
@@ -127,6 +125,33 @@ public class AuthenticationService {
     public List<Instructor> getInstructorList(){
         List<Instructor> instructorList = instructorRepository.findAll();
         return  instructorList;
+    }
+
+    public User getUserByUserEmail(String userEmail){
+        User user =userRepository.findByUserName(userEmail).get();
+        return user;
+    }
+
+    public AuthenticationResponse registerAdmin(AdminRegisterRequest adminRegisterRequest ){
+        boolean isUserPresent = userRepository.findByUserName(adminRegisterRequest.getAdminEmail()).isPresent();
+        if(isUserPresent){
+            return null;
+        }else{
+            User user = User.builder()
+                    .userName(adminRegisterRequest.getAdminEmail())
+                    .userPassword(passwordEncoder.encode(adminRegisterRequest.getAdminPassword()))
+                    .role(Role.ROLE_ADMIN)
+                    .build();
+
+            userRepository.save(user);
+
+            // todo: email verification and account activation part - sachini
+
+
+            var jwtToken = jwtService.generateToken(user);
+            return AuthenticationResponse.builder().token(jwtToken).build();
+        }
+
     }
 
 
