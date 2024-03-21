@@ -60,7 +60,7 @@ public class RequirementStatusController {
         boolean isScoutPresent =  scoutRepository.findByScoutEmail(scoutEmail).isPresent();
         ArrayList<RequirementStatusResponse> requirementStatusList = new ArrayList<>();
         if(isScoutPresent){
-            List<RequirementStatus> requirementList = requirementStatusService.findAll();
+            List<RequirementStatus> requirementList = requirementStatusService.findRequirementStatusByUserName(scoutEmail);
 
 //            for (RequirementStatus requirementStatus : requirementList) {
 //                requirementStatusList.add(requirementStatus);

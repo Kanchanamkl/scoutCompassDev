@@ -63,8 +63,8 @@ public class RequirementStatusService {
 
     }
 
-    public List<RequirementStatus> findAll(){
-        List<RequirementStatus> questionArrayList =  requirementStatusRepository.findAll();
+    public List<RequirementStatus> findRequirementStatusByUserName(String scoutEmail){
+        List<RequirementStatus> questionArrayList =  requirementStatusRepository.findRequirementStatusByUserName(scoutEmail);
         return questionArrayList;
     }
 
