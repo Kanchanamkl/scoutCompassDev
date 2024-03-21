@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/scoutcompass/passing")
@@ -35,7 +36,7 @@ public class PassingController {
     public ResponseEntity<?> getRequirementsByScout(@RequestParam String scoutEmail){
 
         if( passingService.getRequirementStatusListByScout(scoutEmail)!=null){
-            ArrayList<RequirementStatus> requirementStatuses = passingService.getRequirementStatusListByScout(scoutEmail);
+            List<RequirementStatus> requirementStatuses = passingService.getRequirementStatusListByScout(scoutEmail);
             return ResponseEntity.
                     status(HttpStatus.OK)
                     .body(requirementStatuses);

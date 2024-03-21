@@ -4,14 +4,13 @@ import com.scoutcomapss.api.auth.user.Instructor;
 import com.scoutcomapss.api.auth.user.InstructorRepository;
 import com.scoutcomapss.api.auth.user.Scout;
 import com.scoutcomapss.api.auth.user.ScoutRepository;
-import com.scoutcomapss.api.event.Event;
-import com.scoutcomapss.api.profile.ProfileResponse;
 import com.scoutcomapss.api.requirement.status.RequirementStatus;
 import com.scoutcomapss.api.requirement.status.RequirementStatusRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,11 +32,11 @@ public class PassingService {
     }
 
 
-    public ArrayList<RequirementStatus> getRequirementStatusListByScout(String scoutEmail){
+    public List<RequirementStatus> getRequirementStatusListByScout(String scoutEmail){
         boolean isScoutPresent =  scoutRepository.findByScoutEmail(scoutEmail).isPresent();
         if(isScoutPresent){
-            ArrayList<RequirementStatus> requirementList = requirementStatusRepository.findRequirementStatusByUserName(scoutEmail);
-            return  requirementList;
+            List<RequirementStatus> requirementList = requirementStatusRepository.findRequirementStatusByUserName(scoutEmail);
+            return requirementList;
         }else{
             return null;
         }

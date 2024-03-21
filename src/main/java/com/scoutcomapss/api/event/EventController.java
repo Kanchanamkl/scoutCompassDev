@@ -23,7 +23,7 @@ public class EventController {
 
     //scout registration
     @PostMapping("/create")
-    public ResponseEntity<?> registerScout(@RequestBody EventCreateRequest request) {
+    public ResponseEntity<?> createEvent(@RequestBody EventCreateRequest request) {
         return ResponseEntity.ok().body(eventServices.createEvent(request));
     }
 

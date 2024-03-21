@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 @Entity
 @Table(name = "requirement_status")
 @Data
@@ -17,11 +16,18 @@ import java.util.Date;
 @Builder
 public class RequirementStatus {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE
+    )
     private Long id;
     private String userName;
     private Integer awardId;
     private Integer requirementId;
     private Integer marks;
     private String status;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "requirement")
+    public Requirement requirement;
 }

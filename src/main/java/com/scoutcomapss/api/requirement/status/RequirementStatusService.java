@@ -1,13 +1,14 @@
 package com.scoutcomapss.api.requirement.status;
 
+import com.scoutcomapss.api.requirement.quiz.Question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * @author : Kanchana Kalansooriya
- * @since 3/14/2024
- */
+import java.util.List;
+import java.util.Optional;
+
+
 
 @Service
 @RequiredArgsConstructor
@@ -15,9 +16,12 @@ public class RequirementStatusService {
 
     @Autowired
     private RequirementStatusRepository requirementStatusRepository;
+    @Autowired
+    private RequirementRepository requirementRepository;
 
     public String createRequirementService(RequirementStatusRequest  requirementStatusRequest){
 
+        Optional<Requirement> requirement = requirementRepository.findByAwardIdAndRequirementId(2,2);
 
         RequirementStatus  requirementStatus = RequirementStatus.builder()
                 .userName(requirementStatusRequest.getUserName())
@@ -25,6 +29,7 @@ public class RequirementStatusService {
                 .requirementId(requirementStatusRequest.getRequirementId())
                 .marks(requirementStatusRequest.getMarks())
                 .status(getRequirementStatus(requirementStatusRequest.getMarks()))
+                .requirement(requirement.get())
                 .build();
 
         RequirementStatus requirementStatus_ =  requirementStatusRepository.findRequirementStatusByUserNameAndAwardIdAndRequirementId(requirementStatusRequest.getUserName(),requirementStatusRequest.getAwardId(),requirementStatusRequest.getRequirementId());
@@ -57,4 +62,11 @@ public class RequirementStatusService {
         }
 
     }
+
+    public List<RequirementStatus> findAll(){
+        List<RequirementStatus> questionArrayList =  requirementStatusRepository.findAll();
+        return questionArrayList;
+    }
+
+
 }
