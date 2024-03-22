@@ -1,6 +1,7 @@
-package com.scoutcomapss.api.requirement.status;
+package com.scoutcomapss.api.requirement;
 
-import com.scoutcomapss.api.requirement.quiz.Question;
+import com.scoutcomapss.api.requirement.status.Requirement;
+import com.scoutcomapss.api.requirement.status.RequirementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,9 @@ public class RequirementStatusService {
     @Autowired
     private RequirementRepository requirementRepository;
 
-    public String createRequirementService(RequirementStatusRequest  requirementStatusRequest){
+    public String createRequirementStatus(RequirementStatusRequest  requirementStatusRequest){
 
-        Optional<Requirement> requirement = requirementRepository.findByAwardIdAndRequirementId(2,2);
+        Optional<Requirement> requirement = requirementRepository.findByAwardIdAndRequirementId(requirementStatusRequest.getAwardId(),requirementStatusRequest.getRequirementId());
 
         RequirementStatus  requirementStatus = RequirementStatus.builder()
                 .userName(requirementStatusRequest.getUserName())
@@ -34,15 +35,13 @@ public class RequirementStatusService {
 
         RequirementStatus requirementStatus_ =  requirementStatusRepository.findRequirementStatusByUserNameAndAwardIdAndRequirementId(requirementStatusRequest.getUserName(),requirementStatusRequest.getAwardId(),requirementStatusRequest.getRequirementId());
         if(requirementStatus_!=null){
-            requirementStatusRepository.delete(requirementStatus_);
+            requirementStatusRepository.updateMarksById(requirementStatus_.getId(),requirementStatusRequest.getMarks());
+        }else{
+            requirementStatusRepository.save(requirementStatus);
         }
 
-        requirementStatusRepository.save(requirementStatus);
 
-        if (requirementStatus != null) {
-            return "Requirement status inserted successfully ! ";
-        }
-        return null;
+        return "Requirement status inserted successfully ! ";
     }
 
     public RequirementStatus getRequirementStatusByUserNameAndAwardIdAndRequirementId(String userName, Integer awardId , Integer requirementId) {

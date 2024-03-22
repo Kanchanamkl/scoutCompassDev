@@ -1,6 +1,8 @@
-package com.scoutcomapss.api.requirement.status;
+package com.scoutcomapss.api.requirement;
 
 import com.scoutcomapss.api.auth.user.ScoutRepository;
+import com.scoutcomapss.api.requirement.status.Requirement;
+import com.scoutcomapss.api.requirement.status.RequirementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,25 +27,37 @@ public class RequirementStatusController {
     //scout registration
     @PostMapping("/marks/submit")
     public ResponseEntity<?> submitRequirement(@RequestBody RequirementStatusRequest requirementStatusRequest) {
-        return ResponseEntity.ok().body(requirementStatusService.createRequirementService(requirementStatusRequest));
+        return ResponseEntity.ok().body(requirementStatusService.createRequirementStatus(requirementStatusRequest));
     }
 
     @GetMapping()
     public ResponseEntity<?> getStatus( @RequestParam String userName ,  @RequestParam Integer awardId, @RequestParam Integer requirementId ) {
-      RequirementStatus requirementStatus = requirementStatusService.getRequirementStatusByUserNameAndAwardIdAndRequirementId(userName, awardId,requirementId );
-        Requirement requirement = requirementRepository.findByAwardIdAndRequirementId( requirementStatus.getAwardId(),requirementStatus.getRequirementId() ).get();
 
-        RequirementStatusResponse requirementStatusResponse  = new RequirementStatusResponse();
-        requirementStatusResponse.setRequirementId(requirementStatus.getRequirementId());
-        requirementStatusResponse.setAwardId(requirementStatus.getAwardId());
-        requirementStatusResponse.setStatus(requirementStatus.getStatus());
-        requirementStatusResponse.setEnglishName(requirement.getEnglishName());
-        requirementStatusResponse.setSinhalaName(requirement.getSinhalaName());
-        requirementStatusResponse.setMarks(requirementStatus.getMarks());
-        requirementStatusResponse.setIsPracticalRequirement(requirement.getIsPracticalRequirement());
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(requirementStatusResponse);
+        System.out.println("userName-"+userName);
+        System.out.println("awardId-"+awardId);
+        System.out.println("requirementId-"+requirementId);
+      RequirementStatus requirementStatus = requirementStatusService.getRequirementStatusByUserNameAndAwardIdAndRequirementId(userName, awardId,requirementId );
+      if(requirementStatus!=null){
+          Requirement requirement = requirementRepository.findByAwardIdAndRequirementId( requirementStatus.getAwardId(),requirementStatus.getRequirementId() ).get();
+
+          RequirementStatusResponse requirementStatusResponse  = new RequirementStatusResponse();
+          requirementStatusResponse.setRequirementId(requirementStatus.getRequirementId());
+          requirementStatusResponse.setAwardId(requirementStatus.getAwardId());
+          requirementStatusResponse.setStatus(requirementStatus.getStatus());
+          requirementStatusResponse.setEnglishName(requirement.getEnglishName());
+          requirementStatusResponse.setSinhalaName(requirement.getSinhalaName());
+          requirementStatusResponse.setMarks(requirementStatus.getMarks());
+          requirementStatusResponse.setIsPracticalRequirement(requirement.getIsPracticalRequirement());
+          return ResponseEntity
+                  .status(HttpStatus.OK)
+                  .body(requirementStatusResponse);
+      }else{
+          return ResponseEntity
+                  .status(HttpStatus.OK)
+                  .body("requirement status not found!");
+
+      }
+
     }
 
 

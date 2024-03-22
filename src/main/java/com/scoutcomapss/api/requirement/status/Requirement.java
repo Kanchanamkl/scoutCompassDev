@@ -5,8 +5,7 @@ package com.scoutcomapss.api.requirement.status;
  * @since 3/21/2024
  */
 
-import com.scoutcomapss.api.auth.user.Scout;
-import com.scoutcomapss.api.requirement.status.RequirementStatus;
+import com.scoutcomapss.api.requirement.RequirementStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +13,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity

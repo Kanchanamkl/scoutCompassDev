@@ -2,14 +2,11 @@ package com.scoutcomapss.api.auth;
 
 import com.scoutcomapss.api.auth.user.Instructor;
 import com.scoutcomapss.api.auth.user.User;
-import com.scoutcomapss.api.event.Event;
-import com.scoutcomapss.api.requirement.status.RequirementStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
