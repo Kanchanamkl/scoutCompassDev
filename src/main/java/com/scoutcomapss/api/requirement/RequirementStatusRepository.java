@@ -16,8 +16,8 @@ public interface RequirementStatusRepository extends JpaRepository<RequirementSt
 
     @Modifying
     @Transactional
-    @Query("UPDATE RequirementStatus rs SET rs.marks = :marks WHERE rs.id = :id")
-    void updateMarksById(Long id, Integer marks);
+    @Query("UPDATE RequirementStatus rs SET rs.marks = :marks, rs.status = :status WHERE rs.id = :id")
+    void updateMarksAndStatusById(Long id, Integer marks, String status);
 
 
 

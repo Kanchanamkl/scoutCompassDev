@@ -35,7 +35,7 @@ public class RequirementStatusService {
 
         RequirementStatus requirementStatus_ =  requirementStatusRepository.findRequirementStatusByUserNameAndAwardIdAndRequirementId(requirementStatusRequest.getUserName(),requirementStatusRequest.getAwardId(),requirementStatusRequest.getRequirementId());
         if(requirementStatus_!=null){
-            requirementStatusRepository.updateMarksById(requirementStatus_.getId(),requirementStatusRequest.getMarks());
+            requirementStatusRepository.updateMarksAndStatusById(requirementStatus_.getId(),requirementStatusRequest.getMarks(),getRequirementStatus(requirementStatusRequest.getMarks()));
         }else{
             requirementStatusRepository.save(requirementStatus);
         }
