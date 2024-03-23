@@ -78,5 +78,29 @@ public class RequirementStatusService {
 
     }
 
+    public String createPracticalRequirementStatus(RequirementStatusRequest  requirementStatusRequest){
+
+        Optional<Requirement> requirement = requirementRepository.findByAwardIdAndRequirementId(requirementStatusRequest.getAwardId(),requirementStatusRequest.getRequirementId());
+
+        RequirementStatus  requirementStatus = RequirementStatus.builder()
+                .userName(requirementStatusRequest.getUserName())
+                .awardId(requirementStatusRequest.getAwardId())
+                .requirementId(requirementStatusRequest.getRequirementId())
+                .marks(0)
+                .status(requirementStatusRequest.getStatus())
+                .requirement(requirement.get())
+                .build();
+
+ //       RequirementStatus requirementStatus_ =  requirementStatusRepository.findRequirementStatusByUserNameAndAwardIdAndRequirementId(requirementStatusRequest.getUserName(),requirementStatusRequest.getAwardId(),requirementStatusRequest.getRequirementId());
+//        if(requirementStatus_!=null){
+//            requirementStatusRepository.updateMarksAndStatusById(requirementStatus_.getId(),requirementStatusRequest.getMarks(),getRequirementStatus(requirementStatusRequest.getMarks()));
+//        }else{
+            requirementStatusRepository.save(requirementStatus);
+//        }
+
+
+        return "Practical Requirement status inserted successfully ! ";
+    }
+
 
 }

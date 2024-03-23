@@ -26,7 +26,7 @@ public class RequirementStatusController {
 
     //scout registration
     @PostMapping("/marks/submit")
-    public ResponseEntity<?> submitRequirement(@RequestBody RequirementStatusRequest requirementStatusRequest) {
+    public ResponseEntity<?> submitRequirementStatus(@RequestBody RequirementStatusRequest requirementStatusRequest) {
         return ResponseEntity.ok().body(requirementStatusService.createRequirementStatus(requirementStatusRequest));
     }
 
@@ -69,7 +69,7 @@ public class RequirementStatusController {
                 .body(requirement);
     }
 
-    @GetMapping("/requirementList")
+    @GetMapping("/requirementStatusList")
     public List<RequirementStatusResponse> getRequirementStatusListByScoutEmail(@RequestParam  String scoutEmail){
         boolean isScoutPresent =  scoutRepository.findByScoutEmail(scoutEmail).isPresent();
         ArrayList<RequirementStatusResponse> requirementStatusList = new ArrayList<>();
@@ -92,7 +92,10 @@ public class RequirementStatusController {
             requirementStatusResponse.setMarks(requirementList.get(i).getMarks());
             requirementStatusResponse.setIsPracticalRequirement(requirement.getIsPracticalRequirement());
 
-             requirementStatusList.add(requirementStatusResponse);
+            if(requirement.getIsPracticalRequirement()==1&& requirementList.get(i).getStatus().equals("PENDING")){
+                requirementStatusList.add(requirementStatusResponse);
+            }
+
             }
             //  return requirementList.get(1).requirement.getSinhalaName();
             return requirementStatusList;
@@ -109,6 +112,14 @@ public class RequirementStatusController {
 
         return ResponseEntity.ok().body(requirementStatusService.updateRequirementStatus(requirementStatusUpdateRequest));
     }
+
+    @PostMapping("/pracical_req_status")
+    public ResponseEntity<?> submitPracticalRequirementStatus(@RequestBody RequirementStatusRequest requirementStatusRequest) {
+        return ResponseEntity.ok().body(requirementStatusService.createPracticalRequirementStatus(requirementStatusRequest));
+    }
+
+
+
 
 
 
