@@ -1,6 +1,5 @@
-package com.scoutcomapss.api.requirement.status;
+package com.scoutcomapss.api.requirement;
 
-import com.scoutcomapss.api.requirement.status.Requirement;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

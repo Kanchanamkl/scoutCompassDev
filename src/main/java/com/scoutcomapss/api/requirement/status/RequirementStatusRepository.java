@@ -1,4 +1,4 @@
-package com.scoutcomapss.api.requirement;
+package com.scoutcomapss.api.requirement.status;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -19,6 +19,10 @@ public interface RequirementStatusRepository extends JpaRepository<RequirementSt
     @Query("UPDATE RequirementStatus rs SET rs.marks = :marks, rs.status = :status WHERE rs.id = :id")
     void updateMarksAndStatusById(Long id, Integer marks, String status);
 
+    @Modifying
+    @Transactional
+    @Query("UPDATE RequirementStatus rs SET rs.status = :status WHERE rs.id = :id")
+    void updateStatusById(Long id, String status);
 
 
 

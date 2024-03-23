@@ -1,6 +1,7 @@
 package com.scoutcomapss.api.auth;
 
 import com.scoutcomapss.api.auth.user.Instructor;
+import com.scoutcomapss.api.auth.user.Scout;
 import com.scoutcomapss.api.auth.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,11 +1,11 @@
-package com.scoutcomapss.api.requirement.status;
+package com.scoutcomapss.api.requirement;
 
 /**
  * @author : Kanchana Kalansooriya
  * @since 3/21/2024
  */
 
-import com.scoutcomapss.api.requirement.RequirementStatus;
+import com.scoutcomapss.api.requirement.status.RequirementStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

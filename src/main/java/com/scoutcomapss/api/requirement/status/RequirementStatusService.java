@@ -1,7 +1,7 @@
-package com.scoutcomapss.api.requirement;
+package com.scoutcomapss.api.requirement.status;
 
-import com.scoutcomapss.api.requirement.status.Requirement;
-import com.scoutcomapss.api.requirement.status.RequirementRepository;
+import com.scoutcomapss.api.requirement.Requirement;
+import com.scoutcomapss.api.requirement.RequirementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,6 +65,17 @@ public class RequirementStatusService {
     public List<RequirementStatus> findRequirementStatusByUserName(String scoutEmail){
         List<RequirementStatus> questionArrayList =  requirementStatusRepository.findRequirementStatusByUserName(scoutEmail);
         return questionArrayList;
+    }
+
+
+    public String updateRequirementStatus(RequirementStatusUpdateRequest  requirementStatusUpdateRequest){
+
+        RequirementStatus requirementStatus_ =  requirementStatusRepository.findRequirementStatusByUserNameAndAwardIdAndRequirementId(requirementStatusUpdateRequest.getUserName(),requirementStatusUpdateRequest.getAwardId(),requirementStatusUpdateRequest.getRequirementId());
+
+        requirementStatusRepository.updateStatusById(requirementStatus_.getId(),requirementStatusUpdateRequest.getNewStatus());
+
+        return "Requirement status updated : "+requirementStatus_.getStatus()+" to " +requirementStatusUpdateRequest.getNewStatus();
+
     }
 
 

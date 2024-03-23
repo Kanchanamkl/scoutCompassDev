@@ -1,7 +1,7 @@
 package com.scoutcomapss.api.passing;
 
 import com.scoutcomapss.api.auth.user.Scout;
-import com.scoutcomapss.api.requirement.RequirementStatus;
+import com.scoutcomapss.api.requirement.status.RequirementStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

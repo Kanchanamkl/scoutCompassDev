@@ -1,8 +1,8 @@
-package com.scoutcomapss.api.requirement;
+package com.scoutcomapss.api.requirement.status;
 
 import com.scoutcomapss.api.auth.user.ScoutRepository;
-import com.scoutcomapss.api.requirement.status.Requirement;
-import com.scoutcomapss.api.requirement.status.RequirementRepository;
+import com.scoutcomapss.api.requirement.Requirement;
+import com.scoutcomapss.api.requirement.RequirementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -101,6 +101,15 @@ public class RequirementStatusController {
         }
 
     }
+
+
+
+    @PostMapping("/updateStatus")
+    public ResponseEntity<?> updateRequirementStatus(@RequestBody RequirementStatusUpdateRequest requirementStatusUpdateRequest) {
+
+        return ResponseEntity.ok().body(requirementStatusService.updateRequirementStatus(requirementStatusUpdateRequest));
+    }
+
 
 
 

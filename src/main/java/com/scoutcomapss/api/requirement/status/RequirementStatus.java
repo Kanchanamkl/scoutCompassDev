@@ -1,8 +1,8 @@
-package com.scoutcomapss.api.requirement;
+package com.scoutcomapss.api.requirement.status;
 
 
 
-import com.scoutcomapss.api.requirement.status.Requirement;
+import com.scoutcomapss.api.requirement.Requirement;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
