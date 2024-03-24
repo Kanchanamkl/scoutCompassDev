@@ -60,4 +60,9 @@ public class ResourceController {
                     .body("Resource not found or unable to delete");
         }
     }
+
+    @GetMapping("/count")
+    public Long countAllResources() {
+        return resourceService.countAllResources();
+    }
 }

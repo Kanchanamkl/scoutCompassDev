@@ -93,4 +93,14 @@ public class AuthenticationController {
 
   }
 
+  @GetMapping("/instructor/count")
+  public Long countAllInstructors() {
+    return authenticationService.countAllInstructor();
+  }
+
+  @GetMapping("/scout/count")
+  public Long countAllScouts() {
+    return authenticationService.countAllScouts();
+  }
+
 }

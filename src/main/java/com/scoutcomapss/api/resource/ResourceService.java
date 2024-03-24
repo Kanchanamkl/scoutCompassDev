@@ -88,4 +88,9 @@ public class ResourceService {
         return  resourceArrayList;
     }
 
+
+    public Long countAllResources() {
+        return resourceRepository.countAllResources();
+    }
+
 }

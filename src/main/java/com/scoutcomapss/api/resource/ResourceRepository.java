@@ -23,4 +23,8 @@ public interface ResourceRepository extends JpaRepository<Resource , Long> {
     @Query("SELECT r FROM Resource r WHERE r.resourceName = ?1")
     Resource findResourceByResourceName(String resourceName);
 
+
+    @Query("SELECT COUNT(r) FROM Resource r")
+    Long countAllResources();
+
 }

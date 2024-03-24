@@ -155,4 +155,13 @@ public class AuthenticationService {
     }
 
 
+
+    public Long countAllInstructor() {
+        return instructorRepository.countAllInstructor();
+    }
+
+    public Long countAllScouts(){
+        return scoutRepository.countAllScouts();
+    }
+
 }
