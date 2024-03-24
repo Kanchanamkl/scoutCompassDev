@@ -46,7 +46,7 @@ public class ProfileService {
         if(isInstructorPresent){
             Instructor instructor =  instructorRepository.findInstructorByInstructEmail(instructorEmail).get();
             ProfileResponse profileResponse = ProfileResponse.builder()
-                    .fullName(instructor.getInstructFirstName()+" "+ instructor.getInstructFirstName())
+                    .fullName(instructor.getInstructFirstName()+" "+ instructor.getInstructLastname())
                     .email(instructor.getInstructEmail())
                     .dob(instructor.getInstructDob())
                     .district(instructor.getInstructDistrict())
