@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -16,8 +17,8 @@ import java.util.Date;
 public class EventCreateRequest {
 
     private String eventName;
-    private Date eventDate;
-    private Integer dayDuration;
+    private String eventDate;
+    private String dayDuration;
     private String eventLocation;
     private String startTime;
     private String description;

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ import java.util.Date;
 public class ProfileResponse {
     private String fullName;
     private String email;
-    private Date dob;
+    private LocalDate dob;
     private String district;
     private String gender;
     private String mobNumber;

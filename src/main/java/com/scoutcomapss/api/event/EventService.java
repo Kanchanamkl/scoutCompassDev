@@ -16,7 +16,7 @@ import java.util.Optional;
 
 
 @Service
-public class EventServices {
+public class EventService {
 
     @Autowired
     private EventRepository eventRepository;
@@ -63,6 +63,10 @@ public class EventServices {
             return false;
         }
 
+    }
+
+    public Long countAllEvents() {
+        return eventRepository.countAllEvents();
     }
 
 }

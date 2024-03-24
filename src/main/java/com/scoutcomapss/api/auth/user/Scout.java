@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -25,7 +26,7 @@ public class Scout {
   private String scoutLastname;
   @Column(nullable = false)
   private String scoutEmail;
-  private Date  scoutDob;
+  private LocalDate scoutDob;
   private String scoutGender;
   private String scoutMobNum;
   private String scoutSchool;

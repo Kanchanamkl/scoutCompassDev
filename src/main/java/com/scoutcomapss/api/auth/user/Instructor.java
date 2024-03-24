@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +30,7 @@ public class Instructor {
     private String instructFirstName;
     private String instructLastname;
     private String instructEmail;
-    private Date instructDob;
+    private LocalDate instructDob;
     private String instructGender;
     private String instructMobNum;
     private String instructSchool;

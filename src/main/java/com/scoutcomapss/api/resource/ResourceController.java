@@ -27,13 +27,19 @@ public class ResourceController {
     @PostMapping("/upload")
     public ResponseEntity<?> uploadResourceToFIleSystem(@RequestParam("resource") MultipartFile file) throws IOException {
         String uploadImage = resourceService.uploadResouceToFileSystem(file);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(uploadImage);
+        if(uploadImage != null){
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(uploadImage);
+        }else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Resource already exists!");
+        }
+
     }
 
     @GetMapping("/download/{fileName}")
     public ResponseEntity<?> downloadResourceFromFileSystem(@PathVariable String fileName) throws IOException {
-        byte[] imageData=resourceService.downloadResouceFromFileSystem(fileName);
+        byte[] imageData = resourceService.downloadResouceFromFileSystem(fileName);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("application/pdf"))
                 .body(imageData);
@@ -42,12 +48,13 @@ public class ResourceController {
 
 
     @GetMapping("/resourceList")
-    public ResponseEntity<?> getResourceList(){
+    public ResponseEntity<?> getResourceList() {
         ArrayList<Resource> resourceArrayList = resourceService.getResourceList();
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(resourceArrayList);
     }
+
     @DeleteMapping("/delete/{fileName}")
     public ResponseEntity<?> deleteResourceFromFileSystem(@PathVariable String fileName) {
         boolean deletionStatus = resourceService.deleteResource(fileName);
@@ -59,5 +66,10 @@ public class ResourceController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Resource not found or unable to delete");
         }
+    }
+
+    @GetMapping("/count")
+    public Long countAllResources() {
+        return resourceService.countAllResources();
     }
 }
