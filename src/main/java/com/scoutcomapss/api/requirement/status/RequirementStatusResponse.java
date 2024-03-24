@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -15,6 +17,7 @@ public class RequirementStatusResponse {
     private Integer isPracticalRequirement;
     private String sinhalaName;
     private String englishName;
+    private LocalDate completedDate;
     private Integer marks;
     private String status;
 }

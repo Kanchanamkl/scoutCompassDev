@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,7 @@ public class RequirementStatusService {
                 .requirementId(requirementStatusRequest.getRequirementId())
                 .marks(requirementStatusRequest.getMarks())
                 .status(getRequirementStatus(requirementStatusRequest.getMarks()))
+                .completedDate(LocalDate.now())
                 .requirement(requirement.get())
                 .build();
 
@@ -88,6 +90,7 @@ public class RequirementStatusService {
                 .requirementId(requirementStatusRequest.getRequirementId())
                 .marks(0)
                 .status(requirementStatusRequest.getStatus())
+                .completedDate(LocalDate.now())
                 .requirement(requirement.get())
                 .build();
 

@@ -47,6 +47,7 @@ public class RequirementStatusController {
           requirementStatusResponse.setEnglishName(requirement.getEnglishName());
           requirementStatusResponse.setSinhalaName(requirement.getSinhalaName());
           requirementStatusResponse.setMarks(requirementStatus.getMarks());
+          requirementStatusResponse.setCompletedDate(requirementStatus.getCompletedDate());
           requirementStatusResponse.setIsPracticalRequirement(requirement.getIsPracticalRequirement());
           return ResponseEntity
                   .status(HttpStatus.OK)

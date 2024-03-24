@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "requirement_status")
 @Data
@@ -24,6 +26,7 @@ public class RequirementStatus {
     private Long id;
     private String userName;
     private Integer awardId;
+    private LocalDate completedDate;
     private Integer requirementId;
     private Integer marks;
     private String status;
