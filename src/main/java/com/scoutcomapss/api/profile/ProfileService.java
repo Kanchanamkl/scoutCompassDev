@@ -1,5 +1,7 @@
 package com.scoutcomapss.api.profile;
 
+import com.scoutcomapss.api.auth.user.Instructor;
+import com.scoutcomapss.api.auth.user.InstructorRepository;
 import com.scoutcomapss.api.auth.user.Scout;
 import com.scoutcomapss.api.auth.user.ScoutRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ProfileService {
     private final ScoutRepository scoutRepository;
+    private final InstructorRepository instructorRepository;
 
     public ProfileResponse getScoutByEmail(String scoutEmail) {
 
@@ -28,6 +31,28 @@ public class ProfileService {
                     .mobNumber(scout.getScoutMobNum())
                     .school(scout.getScoutSchool())
                     .instructor_name(scout.getInstructor().getInstructFirstName())
+                    .build();
+
+            return profileResponse;
+        }else{
+            return null;
+        }
+    }
+
+
+    public ProfileResponse getInstructorByEmail(String instructorEmail) {
+
+        boolean isInstructorPresent = instructorRepository.findInstructorByInstructEmail(instructorEmail).isPresent();
+        if(isInstructorPresent){
+            Instructor instructor =  instructorRepository.findInstructorByInstructEmail(instructorEmail).get();
+            ProfileResponse profileResponse = ProfileResponse.builder()
+                    .fullName(instructor.getInstructFirstName()+" "+ instructor.getInstructFirstName())
+                    .email(instructor.getInstructEmail())
+                    .dob(instructor.getInstructDob())
+                    .district(instructor.getInstructDistrict())
+                    .gender(instructor.getInstructGender())
+                    .mobNumber(instructor.getInstructMobNum())
+                    .school(instructor.getInstructSchool())
                     .build();
 
             return profileResponse;

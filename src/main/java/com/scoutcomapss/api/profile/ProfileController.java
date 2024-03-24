@@ -29,4 +29,16 @@ public class ProfileController {
     }
 
 
+    @GetMapping("/instructor/{instructorEmail}")
+    public ResponseEntity<?> getInstructorByEmail(@PathVariable String instructorEmail){
+
+        if(profileService.getInstructorByEmail(instructorEmail)!=null){
+            return ResponseEntity.ok().body(profileService.getInstructorByEmail(instructorEmail));
+        }else{
+            return ResponseEntity.badRequest().body("instructor not found!") ;
+        }
+    }
+
+
+
 }
